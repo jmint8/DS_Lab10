@@ -24,15 +24,31 @@ public class BSTNode<T extends Comparable<T>>
 
    public BSTNode(T val, BSTNode<T> l,BSTNode<T> r)
    {
+	   this.val = val;
+	   this.left = l;
+	   this.right =r;
    }
 
-
+	
+	  public T getVal() // additional method for starting summation and largest methods. 
+	  { 
+		  return this.val; 
+	  }
+	  public BSTNode<T> getL()
+	  {
+		  return this.left;
+	  }
+	  public BSTNode<T> getR()
+	  {
+		  return this.right;
+	  }
 
    /*
      Uses recursion to insert the target into the tree
     */
    public void insert(T target)
    {
+	   
    }
 
 
@@ -60,7 +76,13 @@ public class BSTNode<T extends Comparable<T>>
     */
    public T getLargest()
    {
-	return null;
+	   if(this.right==null) {
+		   return this.val;
+	   }
+	   else 
+	   {
+	   return this.right.getLargest();
+	   }
    }
 
 

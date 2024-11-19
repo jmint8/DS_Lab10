@@ -11,8 +11,7 @@ public class BSTree
 
    public BSTree()
    {
-   
-       
+	   root = null;
    }
 
     /**
@@ -29,6 +28,18 @@ public class BSTree
      */
    public void insert(Integer target)
    {
+	   if(target==null)
+	   {
+		   return;
+	   }
+	   if(isEmpty())
+	   {
+		   root = new BSTNode<Integer>(target,null,null);
+	   }
+	   else 
+	   {
+		   root.insert(target);
+	   }
    }
 
 
@@ -38,7 +49,15 @@ public class BSTree
      */
    public Integer retrieve(Integer target)
    {
-	return null;
+	   if(isEmpty())
+	   {
+		   return null;
+	   }
+	   if(target!=null) 
+	   {
+		   return root.retrieve(target);
+	   }
+	   return null;
    }
 
 
@@ -95,8 +114,13 @@ public class BSTree
     */
    public Integer largest()
    {
-	return null;
-   
+	if(isEmpty())
+	{
+		return null;
+	}
+	else{
+		return root.getLargest();
+	}
    }
 
 
@@ -136,10 +160,23 @@ public class BSTree
      */
    public int sum()
    {
-	return 0;
+	   if (root==null)
+	   {
+		   return 0;
+	   }
+	   int total = sumTree(root);
+	   return total;
    }
 
-
+   private int sumTree(BSTNode<Integer> curr)
+   {
+	   if(curr==null)
+	   {
+		   return 0;
+	   }
+	   int total = curr.getVal() + sumTree(curr.getR()) + sumTree(curr.getL());
+	   return total;
+   }
 
     /**
        Returns true if this tree is equal to that tree, false otherwise.
