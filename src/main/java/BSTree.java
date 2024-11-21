@@ -42,7 +42,6 @@ public class BSTree
 	   }
    }
 
-
     /**
        returns the Integer if it is present in the tree
        returns null if target is not in the tree.
@@ -53,11 +52,7 @@ public class BSTree
 	   {
 		   return null;
 	   }
-	   if(target!=null) 
-	   {
-		   return root.retrieve(target);
-	   }
-	   return null;
+	   return root.retrieve(target);
    }
 
 
@@ -71,10 +66,12 @@ public class BSTree
      */
    public int retrieveDepth(Integer target)
    {
-	return 0;
-       
+	   if(isEmpty())
+	   {
+		   return 0;
+	   }   
+	   return root.retrieveDepth(target, 0);
    }
-
     
     /**
        This is an inner class to create a consumer that will count the 
@@ -97,8 +94,9 @@ public class BSTree
    public int getSize()
    {
       if(root==null) 
+      {
          return 0;
-   
+      }
       CountConsumer count = new CountConsumer();
       root.inOrderTraversal(count);
       return count.nodes;
@@ -130,7 +128,7 @@ public class BSTree
        Instead of using an inner class, this time use an anonymous class
        Most of the code has been set up for you.
     */
-   public List<Integer> toList()
+   public List<Integer> toList() //TODO
    {
        
       List<Integer> L= new ArrayList<Integer>();
@@ -149,11 +147,7 @@ public class BSTree
       }
       return L;
    
-   
    }
-
-
-
 
     /*
       Returns the sum of all the integers in the Tree
@@ -188,14 +182,11 @@ public class BSTree
 
        Note: we didn't use equals because it is slightly more complex to get right.
      */
-   public boolean myEquals(BSTree that)
+   public boolean myEquals(BSTree that) //TODO
    {
 	return false;
    
    }
-
-
-
 
 
 
