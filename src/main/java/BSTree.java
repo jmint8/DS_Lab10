@@ -28,11 +28,10 @@ public class BSTree
      */
    public void insert(Integer target)
    {
-	   if(target==null)
-	   {
-		   return;
-	   }
-	   if(isEmpty())
+		/*
+		 * if(target==null) { return; }
+		 */
+	   if(root == null)
 	   {
 		   root = new BSTNode<Integer>(target,null,null);
 	   }
@@ -48,7 +47,7 @@ public class BSTree
      */
    public Integer retrieve(Integer target)
    {
-	   if(isEmpty())
+	   if(root == null)
 	   {
 		   return null;
 	   }
@@ -141,7 +140,7 @@ public class BSTree
             {
                public void accept(Integer i)
                {
-               //need to add some code here...
+               L.add(i);
                }
             });
       }
@@ -158,19 +157,15 @@ public class BSTree
 	   {
 		   return 0;
 	   }
-	   int total = sumTree(root);
+	   int total = 0;
+	   List<Integer> treeL = this.toList();
+	   for (int i = 0; i< treeL.size();i++)
+	   {
+		   total += treeL.get(i);
+	   }
 	   return total;
    }
 
-   private int sumTree(BSTNode<Integer> curr)
-   {
-	   if(curr==null)
-	   {
-		   return 0;
-	   }
-	   int total = curr.getVal() + sumTree(curr.getR()) + sumTree(curr.getL());
-	   return total;
-   }
 
     /**
        Returns true if this tree is equal to that tree, false otherwise.
@@ -184,8 +179,32 @@ public class BSTree
      */
    public boolean myEquals(BSTree that) //TODO
    {
-	return false;
-   
+		if(this.root == null & that.root==null)
+		{
+			return true;
+		}
+		if(this.root == null || that.root == null)
+		{
+			return false;
+		}
+		else
+		{
+			return this.root.myEquals(that.root);
+		}
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   /*
+		 * List<Integer> thisList = this.toList(); List<Integer> thatList =
+		 * that.toList();
+		 * 
+		 * return thisList.equals(thatList);
+		 */
    }
 
 

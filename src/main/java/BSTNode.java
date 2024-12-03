@@ -48,16 +48,15 @@ public class BSTNode<T extends Comparable<T>>
     */
    public void insert(T target)
    {
-	   if(target==this.val)
-	   {
-		   return;
-	   }
+		/*
+		 * if(target==this.val) { return; }
+		 */
 	   if (this.val.compareTo(target)>0)
 	   {
 		   if(this.left==null)
 		   {
-			   BSTNode<T> newn = new BSTNode<T>(target);
-			   this.left = newn;
+			   left = new BSTNode<T>(target);
+			   
 		   }
 		   else 
 		   {
@@ -68,15 +67,14 @@ public class BSTNode<T extends Comparable<T>>
 	   {
 		   if(this.right==null)
 		   {
-			   BSTNode<T> newn = new BSTNode<T>(target);
-			   this.right = newn;
+			   right = new BSTNode<T>(target);
+			   
 		   }
 		   else
 		   {
 			   this.right.insert(target);
 		   }
-	   }
-	   
+	   } 
    }
 
 
@@ -90,13 +88,13 @@ public class BSTNode<T extends Comparable<T>>
 	   {
 		   return target;
 	   }
-	   if(this.val.compareTo(target)>0)
+	   if(this.left != null && this.val.compareTo(target)>0)
 	   {
-		   return retrieve(this.left.val);
+		   return this.left.retrieve(target);
 	   }
-	   else if(this.val.compareTo(target)<0)
+	   else if(this.right != null && this.val.compareTo(target)<0)
 	   {
-		   return retrieve(this.right.val);
+		   return this.right.retrieve(target);
 	   }
 	   else 
 	   {
@@ -150,9 +148,16 @@ public class BSTNode<T extends Comparable<T>>
       "Visit" should be.
 
     */
-   public void inOrderTraversal(Consumer<T> consume) //TODO
+   public void inOrderTraversal(Consumer<T> consume) 
    {
-
+	   if(this.left != null) {
+		   
+		   this.left.inOrderTraversal(consume);
+	   }
+	   consume.accept(this.val);
+	   if(this.right != null) {
+		   this.right.inOrderTraversal(consume);
+	   }
    }
 
 
@@ -167,9 +172,23 @@ public class BSTNode<T extends Comparable<T>>
     */
    public boolean myEquals(BSTNode<T> that) //TODO
    {
-	return false;
-   
-
+	   if(that == null)
+	   {
+		   return false;
+	   }
+	   if(!this.val.equals(that.val))
+	   {
+		   return false;
+	   }
+	   if ((this.right == null && that.right != null) || (this.right != null && !this.right.myEquals(that.right))) 
+	   {
+	       return false;
+	   }
+	   if ((this.left == null && that.left != null) || (this.left != null && !this.left.myEquals(that.left))) 
+	   {
+	       return false;
+	   }
+	   return true;
    }
 
 }
